@@ -5,7 +5,7 @@ package threadcoreknowledge.createthreads.wrongways;
  * @Author DiangD
  * @Date 2020/1/20
  * @Version 1.0
- * @Description
+ * @Description 匿名内部类启动线程
  **/
 public class AnonymousInnerClassDemo {
     public static void main(String[] args) {
