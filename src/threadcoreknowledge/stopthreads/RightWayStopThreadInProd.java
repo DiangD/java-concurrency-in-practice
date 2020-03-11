@@ -11,7 +11,7 @@ package threadcoreknowledge.stopthreads;
 public class RightWayStopThreadInProd implements Runnable {
     @Override
     public void run() {
-        while (true && !Thread.currentThread().isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted()) {
             System.out.println("go");
             try {
                 throwInMethod();
