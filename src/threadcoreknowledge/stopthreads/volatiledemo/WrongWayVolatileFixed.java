@@ -1,9 +1,6 @@
 package threadcoreknowledge.stopthreads.volatiledemo;
 
-import sun.applet.Main;
-
 import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.BlockingQueue;
 
 /**
  * @ClassName WrongWayVolatileFixed
@@ -14,24 +11,24 @@ import java.util.concurrent.BlockingQueue;
  **/
 public class WrongWayVolatileFixed {
     public static void main(String[] args) throws InterruptedException {
-        BlockingQueue storage = new ArrayBlockingQueue(10);
-        WrongWayVolatileFixed body = new WrongWayVolatileFixed();
-        Producer producer = body.new Producer(storage);
-        Consumer consumer = body.new Consumer(storage);
+        ArrayBlockingQueue<Integer> storage = new ArrayBlockingQueue<>(10);
+        Producer producer = new Producer(storage);
+        Consumer consumer = new Consumer(storage);
         Thread producerThread = new Thread(producer);
         producerThread.start();
         Thread.sleep(1000);
         while (consumer.needMoreNums()) {
-            System.out.println(consumer.storage.take()+"被消费了");
+            System.out.println(consumer.storage.take() + "被消费了");
             Thread.sleep(100);
         }
         System.out.println("消费者不需要更多数据了");
         producerThread.interrupt();
     }
-     class Producer implements Runnable {
-        BlockingQueue storage;
 
-        public Producer(BlockingQueue storage) {
+    static class Producer implements Runnable {
+        ArrayBlockingQueue<Integer> storage;
+
+        public Producer(ArrayBlockingQueue<Integer> storage) {
             this.storage = storage;
         }
 
@@ -55,10 +52,10 @@ public class WrongWayVolatileFixed {
         }
     }
 
-      class Consumer {
-        BlockingQueue storage;
+    static class Consumer {
+        ArrayBlockingQueue<Integer> storage;
 
-        public Consumer(BlockingQueue storage) {
+        public Consumer(ArrayBlockingQueue<Integer> storage) {
             this.storage = storage;
         }
 
