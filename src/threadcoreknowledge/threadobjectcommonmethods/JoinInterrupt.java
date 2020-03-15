@@ -30,6 +30,6 @@ public class JoinInterrupt {
             System.out.println(currentThread().getName()+"主线程被中断");
             thread.interrupt();
         }
-        System.out.println("子线程已·运行完毕");
+        System.out.println("子线程已运行完毕");
     }
 }

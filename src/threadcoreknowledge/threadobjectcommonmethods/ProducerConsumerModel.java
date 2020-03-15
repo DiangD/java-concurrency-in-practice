@@ -2,7 +2,6 @@ package threadcoreknowledge.threadobjectcommonmethods;
 
 import java.util.Date;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  * @ClassName ProducerConsumerModel
@@ -13,7 +12,7 @@ import java.util.List;
  **/
 public class ProducerConsumerModel {
     public static void main(String[] args) {
-        EventStorage eventStorage = new EventStorage(10,new LinkedList<>());
+        EventStorage eventStorage = new EventStorage(10);
         Producer producer = new Producer(eventStorage);
         Consumer consumer = new Consumer(eventStorage);
         new Thread(producer).start();
@@ -50,15 +49,15 @@ public class ProducerConsumerModel {
 
     static class EventStorage {
         private int maxSize;
-        private List<Date> storage;
+        private LinkedList<Date> storage;
 
-        public EventStorage(int maxSize, LinkedList<Date> storage) {
+        public EventStorage(int maxSize) {
             this.maxSize = maxSize;
             this.storage = new LinkedList<>();
         }
 
         public synchronized void put() {
-            if (storage.size() == maxSize) {
+            while (storage.size() == maxSize) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
@@ -71,17 +70,15 @@ public class ProducerConsumerModel {
         }
 
         public synchronized void take() {
-            if (storage.size() == 0) {
+            while (storage.size() == 0) {
                 try {
                     wait();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            System.out.println("拿到了"+storage.remove(0)+"现在仓库还剩下"+storage.size());
+            System.out.println("拿到了"+storage.poll()+"现在仓库还剩下"+storage.size());
             notify();
         }
-
     }
-
 }

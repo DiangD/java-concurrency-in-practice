@@ -1,7 +1,5 @@
 package threadcoreknowledge.threadobjectcommonmethods;
 
-import java.util.concurrent.locks.Lock;
-
 /**
  * @ClassName WaitNotifyprintOddEvenWait
  * @Author DiangD

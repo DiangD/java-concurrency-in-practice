@@ -18,6 +18,7 @@ public class Wait {
                 System.out.println(Thread.currentThread().getName()+"开始执行了");
                 try {
                     object.wait();
+                    System.out.println("wait will release lock");
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

@@ -33,6 +33,4 @@ public class WaitNotifyPrintOddEvenSyn {
             }
         },"偶数").start();
     }
-
-
 }
